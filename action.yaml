@@ -1,0 +1,45 @@
+name: "GHCR Multi-Arch Build"
+description: Performs some preparation to run tests
+inputs:
+  ADMIN_PAT:
+    description: ADMIN_PAT
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+      with:
+        platforms: "arm64,amd64"
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v2
+      with:
+        config-inline: |
+          [worker.oci]
+            max-parallelism = 2
+    - name: Inspect builder
+      run: |
+        echo "Name:      ${{ steps.buildx.outputs.name }}"
+        echo "Endpoint:  ${{ steps.buildx.outputs.endpoint }}"
+        echo "Status:    ${{ steps.buildx.outputs.status }}"
+        echo "Flags:     ${{ steps.buildx.outputs.flags }}"
+        echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
+      shell: bash
+    - name: Login to Github Packages (GHCR)
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: bisonadmin
+        password: ${{ inputs.ADMIN_PAT }}
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        file: cicd/Dockerfile
+        platforms: linux/arm64,linux/amd64
+        tags: ghcr.io/circle9r/${{ env.APP_NAME }}:latest
+        # ulimit: "nofile=1024000"
+        build-args: |
+          NODE_ENV=${{ env.NODE_ENV }}
+          NODE_AUTH_TOKEN=${{ inputs.ADMIN_PAT}}
