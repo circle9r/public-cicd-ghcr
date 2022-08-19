@@ -32,15 +32,13 @@ runs:
     - name: Login to Github Packages (GHCR)
       uses: docker/login-action@v2
       with:
-        context: .
         registry: ghcr.io
-        # username: bisonadmin
-        # password: ${{ inputs.ADMIN_PAT }}
-        secrets: |
-          GIT_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
+        username: bisonadmin
+        password: ${{ inputs.ADMIN_PAT }}
     - name: Build and push
       uses: docker/build-push-action@v3
       with:
+        context: .
         push: true
         file: cicd/Dockerfile
         platforms: linux/arm64,linux/amd64
@@ -49,3 +47,5 @@ runs:
         build-args: |
           NODE_ENV=${{ env.NODE_ENV }}
           NODE_AUTH_TOKEN=${{ inputs.ADMIN_PAT}}
+        secrets: |
+          GIT_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
