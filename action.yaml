@@ -4,6 +4,9 @@ inputs:
   ADMIN_PAT:
     description: ADMIN_PAT
     required: true
+  REPOSITORY:
+    description: REPOSITORY
+    required: true
 runs:
   using: composite
   steps:
@@ -38,7 +41,7 @@ runs:
         push: true
         file: cicd/Dockerfile
         platforms: linux/arm64,linux/amd64
-        tags: ghcr.io/circle9r/${{ env.APP_NAME }}:latest
+        tags: ghcr.io/${{ inputs.REPOSITORY }}:latest
         # ulimit: "nofile=1024000"
         build-args: |
           NODE_ENV=${{ env.NODE_ENV }}
