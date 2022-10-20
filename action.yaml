@@ -7,6 +7,10 @@ inputs:
   REPOSITORY:
     description: REPOSITORY
     required: true
+  SHEETJS_TOKEN:
+    description: SHEETJS_TOKEN
+    required: false
+    default: ""
 runs:
   using: composite
   steps:
@@ -46,6 +50,7 @@ runs:
         # ulimit: "nofile=1024000"
         build-args: |
           NODE_ENV=${{ env.NODE_ENV }}
-          NODE_AUTH_TOKEN=${{ inputs.ADMIN_PAT}}
+          NODE_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
+          SHEETJS_TOKEN=${{ inputs.SHEETJS_TOKEN }}
         secrets: |
           GIT_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
