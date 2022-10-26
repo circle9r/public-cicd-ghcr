@@ -11,6 +11,10 @@ inputs:
     description: SHEETJS_TOKEN
     required: false
     default: ""
+  MUI_LICENSE_KEY:
+    description: MUI_LICENSE_KEY
+    required: false
+    default: ""
 runs:
   using: composite
   steps:
@@ -52,5 +56,6 @@ runs:
           NODE_ENV=${{ env.NODE_ENV }}
           NODE_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
           SHEETJS_TOKEN=${{ inputs.SHEETJS_TOKEN }}
+          MUI_LICENSE_KEY=${{ inputs.MUI_LICENSE_KEY }}
         secrets: |
           GIT_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
