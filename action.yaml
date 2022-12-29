@@ -57,5 +57,6 @@ runs:
           NODE_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
           SHEETJS_TOKEN=${{ inputs.SHEETJS_TOKEN }}
           MUI_LICENSE_KEY=${{ inputs.MUI_LICENSE_KEY }}
+          BISON_PAYMENTS_API_URL=${{ inputs.BISON_PAYMENTS_API_URL }}
         secrets: |
           GIT_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
