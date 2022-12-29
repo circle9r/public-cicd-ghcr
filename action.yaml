@@ -58,5 +58,7 @@ runs:
           SHEETJS_TOKEN=${{ inputs.SHEETJS_TOKEN }}
           MUI_LICENSE_KEY=${{ inputs.MUI_LICENSE_KEY }}
           BISON_PAYMENTS_API_URL=${{ inputs.BISON_PAYMENTS_API_URL }}
+          BC_CLIENT_SECRET_V2=${{ inputs.BC_CLIENT_SECRET_V2 }}
+          BC_SUBSCRIPTION_KEY=${{ inputs.BC_SUBSCRIPTION_KEY }}
         secrets: |
           GIT_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
