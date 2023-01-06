@@ -28,7 +28,7 @@ runs:
       with:
         config-inline: |
           [worker.oci]
-            max-parallelism = 2
+            max-parallelism = 1
     - name: Inspect builder
       run: |
         echo "Name:      ${{ steps.buildx.outputs.name }}"
