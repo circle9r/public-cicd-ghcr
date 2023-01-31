@@ -7,14 +7,9 @@ inputs:
   REPOSITORY:
     description: REPOSITORY
     required: true
-  SHEETJS_TOKEN:
-    description: SHEETJS_TOKEN
+  BUILD_ARGS:
+    description: List of docker build args
     required: false
-    default: ""
-  MUI_LICENSE_KEY:
-    description: MUI_LICENSE_KEY
-    required: false
-    default: ""
 runs:
   using: composite
   steps:
@@ -52,12 +47,6 @@ runs:
         platforms: linux/arm64,linux/amd64
         tags: ghcr.io/${{ inputs.REPOSITORY }}:latest
         # ulimit: "nofile=1024000"
-        build-args: |
-          NODE_ENV=${{ env.NODE_ENV }}
-          NODE_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
-          SHEETJS_TOKEN=${{ inputs.SHEETJS_TOKEN }}
-          MUI_LICENSE_KEY=${{ inputs.MUI_LICENSE_KEY }}
-          BC_CLIENT_SECRET_V2=${{ inputs.BC_CLIENT_SECRET_V2 }}
-          BC_SUBSCRIPTION_KEY=${{ inputs.BC_SUBSCRIPTION_KEY }}
+        build-args: ${{ input.BUILD_ARGS }}
         secrets: |
           GIT_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
