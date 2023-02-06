@@ -59,6 +59,7 @@ runs:
         build-args: |
           NODE_ENV=${{ env.NODE_ENV }}
           NODE_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
+          REPOSITORY=${{ inputs.REPOSITORY }}
           SHEETJS_TOKEN=${{ inputs.SHEETJS_TOKEN }}
           MUI_LICENSE_KEY=${{ inputs.MUI_LICENSE_KEY }}
           BC_CLIENT_SECRET_V2=${{ inputs.BC_CLIENT_SECRET_V2 }}
