@@ -7,6 +7,10 @@ inputs:
   REPOSITORY:
     description: REPOSITORY
     required: true
+  DOCKERFILE:
+    description: DOCKERFILE
+    required: false
+    default: "cicd/Dockerfile"
   SHEETJS_TOKEN:
     description: SHEETJS_TOKEN
     required: false
@@ -44,11 +48,11 @@ runs:
         username: bisonadmin
         password: ${{ inputs.ADMIN_PAT }}
     - name: Build and push
-      uses: docker/build-push-action@v3
+      uses: docker/build-push-action@v4
       with:
         context: .
         push: true
-        file: cicd/Dockerfile
+        file: ${{ inputs.DOCKERFILE }}
         platforms: linux/arm64,linux/amd64
         tags: ghcr.io/${{ inputs.REPOSITORY }}:latest
         # ulimit: "nofile=1024000"
