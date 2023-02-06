@@ -11,6 +11,10 @@ inputs:
     description: DOCKERFILE
     required: false
     default: "cicd/Dockerfile"
+  TAG:
+    description: TAG
+    required: false
+    default: "latest"
   SHEETJS_TOKEN:
     description: SHEETJS_TOKEN
     required: false
@@ -54,7 +58,7 @@ runs:
         push: true
         file: ${{ inputs.DOCKERFILE }}
         platforms: linux/arm64,linux/amd64
-        tags: ghcr.io/${{ inputs.REPOSITORY }}:latest
+        tags: ghcr.io/${{ inputs.REPOSITORY }}:${{ inputs.TAG }}
         # ulimit: "nofile=1024000"
         build-args: |
           NODE_ENV=${{ env.NODE_ENV }}
