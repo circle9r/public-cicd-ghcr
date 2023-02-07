@@ -37,6 +37,7 @@ runs:
         config-inline: |
           [worker.oci]
             max-parallelism = 1
+        platforms: "arm64,amd64"
     - name: Inspect builder
       run: |
         echo "Name:      ${{ steps.buildx.outputs.name }}"
@@ -59,7 +60,9 @@ runs:
         file: ${{ inputs.DOCKERFILE }}
         platforms: linux/arm64,linux/amd64
         tags: ghcr.io/${{ inputs.REPOSITORY }}:${{ inputs.TAG }}
-        # ulimit: "nofile=1024000"
+        ulimit: "nofile=1024000"
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
         build-args: |
           NODE_ENV=${{ env.NODE_ENV }}
           NODE_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
