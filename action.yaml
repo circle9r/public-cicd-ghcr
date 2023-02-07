@@ -64,7 +64,7 @@ runs:
         file: ${{ inputs.DOCKERFILE }}
         platforms: linux/arm64,linux/amd64
         tags: ghcr.io/${{ inputs.REPOSITORY }}:${{ inputs.TAG }}
-        ulimit: "nofile=1024000"
+        ulimit: "nofile=1024000 -c 8 -m 8000"
         cache-from: type=gha
         cache-to: type=gha,mode=max
         build-args: |
