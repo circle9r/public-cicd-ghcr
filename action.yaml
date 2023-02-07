@@ -15,6 +15,10 @@ inputs:
     description: TAG
     required: false
     default: "latest"
+  ARCH:
+    description: ARCH
+    required: false
+    default: "arm64,amd64"
   SHEETJS_TOKEN:
     description: SHEETJS_TOKEN
     required: false
@@ -29,7 +33,7 @@ runs:
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
       with:
-        platforms: "arm64,amd64"
+        platforms: ${{ inputs.ARCH }}
     - name: Set up Docker Buildx
       id: buildx
       uses: docker/setup-buildx-action@v2
@@ -37,7 +41,7 @@ runs:
         config-inline: |
           [worker.oci]
             max-parallelism = 1
-        platforms: "arm64,amd64"
+        platforms: ${{ inputs.ARCH }}
     - name: Inspect builder
       run: |
         echo "Name:      ${{ steps.buildx.outputs.name }}"
