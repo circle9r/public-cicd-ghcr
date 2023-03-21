@@ -27,6 +27,14 @@ inputs:
     description: MUI_LICENSE_KEY
     required: false
     default: ""
+  BC_CLIENT_SECRET_V2:
+    description: BC_CLIENT_SECRET_V2
+    required: false
+    default: ""
+  BC_SUBSCRIPTION_KEY:
+    description: BC_SUBSCRIPTION_KEY
+    required: false
+    default: ""
 runs:
   using: composite
   steps:
@@ -73,5 +81,7 @@ runs:
           REPOSITORY=${{ inputs.REPOSITORY }}
           SHEETJS_TOKEN=${{ inputs.SHEETJS_TOKEN }}
           MUI_LICENSE_KEY=${{ inputs.MUI_LICENSE_KEY }}
+          BC_CLIENT_SECRET_V2=${{ inputs.BC_CLIENT_SECRET_V2 }}
+          BC_SUBSCRIPTION_KEY=${{ inputs.BC_SUBSCRIPTION_KEY }}
         secrets: |
           GIT_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
