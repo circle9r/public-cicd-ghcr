@@ -19,6 +19,10 @@ inputs:
     description: ARCH
     required: false
     default: "arm64,amd64"
+  BUF_TOKEN:
+    description: BUF_TOKEN
+    required: false
+    default: ""
   SHEETJS_TOKEN:
     description: SHEETJS_TOKEN
     required: false
@@ -79,6 +83,7 @@ runs:
           NODE_ENV=${{ env.NODE_ENV }}
           NODE_AUTH_TOKEN=${{ inputs.ADMIN_PAT }}
           REPOSITORY=${{ inputs.REPOSITORY }}
+          BUF_TOKEN=${{ inputs.BUF_TOKEN }}
           SHEETJS_TOKEN=${{ inputs.SHEETJS_TOKEN }}
           MUI_LICENSE_KEY=${{ inputs.MUI_LICENSE_KEY }}
           BC_CLIENT_SECRET_V2=${{ inputs.BC_CLIENT_SECRET_V2 }}
